@@ -1,11 +1,3 @@
-# Updated full application with Step 2: Employees Module
-# ======================
-# This file now contains:
-# - Fire units CRUD
-# - Employees CRUD
-# - Map markers for units & employees
-# - View employees of a selected unit
-# ======================================
 
 import tkinter as tk
 from tkinter import *
@@ -13,9 +5,6 @@ import tkintermapview
 import requests
 from bs4 import BeautifulSoup
 
-# ===========================
-# DATA MODELS
-# ===========================
 class FireUnit:
     def __init__(self, name: str, city: str):
         self.name = name
@@ -56,9 +45,6 @@ class Employee:
         except:
             return [52.0, 21.0]
 
-# ===========================
-# ROOT WINDOW
-# ===========================
 root = Tk()
 root.title("Fire Management System")
 root.geometry("1200x850")
@@ -83,9 +69,6 @@ map_widget.grid(row=0, column=0)
 fire_units: list[FireUnit] = []
 employees: list[Employee] = []
 
-# ===========================
-# GUI – FIRE UNITS
-# ===========================
 Label(frame_units, text="Jednostki Straży").grid(row=0, column=0, columnspan=2)
 
 unit_list = Listbox(frame_units)
@@ -129,9 +112,6 @@ def delete_fire_unit():
 Button(frame_units, text="Dodaj jednostkę", command=add_fire_unit).grid(row=4, column=0)
 Button(frame_units, text="Usuń jednostkę", command=delete_fire_unit).grid(row=4, column=1)
 
-# ===========================
-# GUI – EMPLOYEES
-# ===========================
 Label(frame_employees, text="Pracownicy").grid(row=0, column=0, columnspan=2)
 
 employee_list = Listbox(frame_employees, width=50)
@@ -184,10 +164,6 @@ def add_employee():
 
 Button(frame_employees, text="Dodaj pracownika", command=add_employee).grid(row=6, column=0)
 
-# ===========================
-# SHOW UNIT DETAILS ON SELECT
-# ===========================
-
 def show_unit_details(event=None):
     i = unit_list.index(ACTIVE)
     if i < 0:
@@ -198,9 +174,6 @@ def show_unit_details(event=None):
 
 unit_list.bind('<<ListboxSelect>>', show_unit_details)
 
-# ===========================
-# DELETE EMPLOYEE
-# ===========================
 
 def delete_employee():
     i = employee_list.index(ACTIVE)
