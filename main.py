@@ -109,6 +109,16 @@ def delete_fire_unit():
     del fire_units[i]
     refresh_units()
 
+def show_unit_details_button():
+    i = unit_list.index(ACTIVE)
+    if i < 0:
+        return
+    u = fire_units[i]
+    map_widget.set_position(u.coords[0], u.coords[1])
+    map_widget.set_zoom(12)
+
+Button(frame_units, text="Pokaż szczegóły", command=show_unit_details_button).grid(row=5, column=0, columnspan=2)
+
 Button(frame_units, text="Dodaj jednostkę", command=add_fire_unit).grid(row=4, column=0)
 Button(frame_units, text="Usuń jednostkę", command=delete_fire_unit).grid(row=4, column=1)
 
@@ -181,6 +191,21 @@ def delete_employee():
         return
     del employees[i]
     refresh_employees()
+
+from tkinter import messagebox
+
+def show_employee_details_button():
+    i = employee_list.index(ACTIVE)
+    if i < 0:
+        return
+    e = employees[i]
+    messagebox.showinfo(
+        "Szczegóły pracownika",
+        f"Imię: {e.name}\nRola: {e.role}\nMiasto: {e.city}\nJednostka: {e.fire_unit.name}"
+    )
+
+Button(frame_employees, text="Pokaż szczegóły", command=show_employee_details_button).grid(row=7, column=0, columnspan=2)
+
 
 Button(frame_employees, text="Usuń pracownika", command=delete_employee).grid(row=6, column=1)
 
